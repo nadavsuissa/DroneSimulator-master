@@ -15,14 +15,12 @@ public class SimulationWindow {
 	private JFrame frame;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SimulationWindow window = new SimulationWindow();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				SimulationWindow window = new SimulationWindow();
+				window.frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -40,54 +38,38 @@ public class SimulationWindow {
 		frame.setTitle("Drone Simulator");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		
-		
+
+
+
 		/*
 		 * Stop\Resume
 		 */
-	
+
 		JButton stopBtn = new JButton("Start/Pause");
-		stopBtn.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  if(toogleStop) {
-					  s.stop();
-					  CPU.stopAllCPUS();
-				  } else {
-					  s.start();
-					  CPU.resumeAllCPUS();
-				  }
-				  toogleStop = !toogleStop;
-			  }
+		stopBtn.addActionListener(e -> {
+			if (toogleStop) {
+				s.stop();
+				CPU.stopAllCPUS();
+			} else {
+				s.start();
+				CPU.resumeAllCPUS();
+			}
+			toogleStop = !toogleStop;
 		});
 		stopBtn.setBounds(1300, 0, 170, 50);
 		frame.getContentPane().add(stopBtn);
 		/*
 		 * Speeds
 		 */
-		
-		
+
+
 		JButton speedBtn1 = new JButton("speedUp");
-		speedBtn1.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.speedUp();
-			  }
-		});
+		speedBtn1.addActionListener(e -> algo1.speedUp());
 		speedBtn1.setBounds(1300, 100, 100, 50);
 		frame.getContentPane().add(speedBtn1);
 		
 		JButton speedBtn2 = new JButton("speedDown");
-		speedBtn2.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.speedDown();
-			  }
-		});
+		speedBtn2.addActionListener(e -> algo1.speedDown());
 		speedBtn2.setBounds(1400, 100, 100, 50);
 		frame.getContentPane().add(speedBtn2);
 		
@@ -96,24 +78,12 @@ public class SimulationWindow {
 		 */
 		
 		JButton spinBtn1 = new JButton("spin180");
-		spinBtn1.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.spinBy(180);
-			  }
-		});
+		spinBtn1.addActionListener(e -> algo1.spinBy(180));
 		spinBtn1.setBounds(1300, 200, 100, 50);
 		frame.getContentPane().add(spinBtn1);
 		
 		JButton spinBtn2 = new JButton("spin90");
-		spinBtn2.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.spinBy(90);
-			  }
-		});
+		spinBtn2.addActionListener(e -> algo1.spinBy(90));
 		spinBtn2.setBounds(1400, 200, 100, 50);
 		frame.getContentPane().add(spinBtn2);
 		
@@ -205,7 +175,7 @@ public class SimulationWindow {
 		returnBtn.setBounds(1500, 400, 120, 50);
 		frame.getContentPane().add(returnBtn);
 		//
-		JButton updownBtn = new JButton("Up and Down Home");
+		JButton updownBtn = new JButton("Up and Down Home"); // Like Asked as part of Assignment
 		updownBtn.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
