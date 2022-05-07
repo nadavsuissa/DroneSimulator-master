@@ -88,35 +88,17 @@ public class SimulationWindow {
 		frame.getContentPane().add(spinBtn2);
 		
 		JButton spinBtn3 = new JButton("spin60");
-		spinBtn3.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.spinBy(60);
-			  }
-		});
+		spinBtn3.addActionListener(e -> algo1.spinBy(60));
 		spinBtn3.setBounds(1500, 200, 100, 50);
 		frame.getContentPane().add(spinBtn3);
 		
 		JButton spinBtn4 = new JButton("spin45");
-		spinBtn4.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.spinBy(60);
-			  }
-		});
+		spinBtn4.addActionListener(e -> algo1.spinBy(60));
 		spinBtn4.setBounds(1300, 300, 100, 50);
 		frame.getContentPane().add(spinBtn4);
 		
 		JButton spinBtn5 = new JButton("spin30");
-		spinBtn5.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.spinBy(30);
-			  }
-		});
+		spinBtn5.addActionListener(e -> algo1.spinBy(30));
 		spinBtn5.setBounds(1400, 300, 100, 50);
 		frame.getContentPane().add(spinBtn5);
 		
@@ -159,49 +141,29 @@ public class SimulationWindow {
 		/*
 		 * RETURN TO HOME
 		 */
-		
+
 
 		JButton returnBtn = new JButton("Return Home");
 		returnBtn.addActionListener(e -> {
 			return_home = !return_home;
 			algo1.speedDown();
-			algo1.spinBy(180, true, new Func() {
-				  @Override
-				  public void method() {
-					  algo1.speedUp();
-				  }
-			  });
+			algo1.spinBy(180, true, () -> algo1.speedUp());
 		});
 		returnBtn.setBounds(1500, 400, 120, 50);
 		frame.getContentPane().add(returnBtn);
 		//
 		JButton updownBtn = new JButton("Up and Down Home"); // Like Asked as part of Assignment
-		updownBtn.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				return_home = !return_home;
-				algo1.speedDown();
-				algo1.spinBy(180, true, new Func() {
-					@Override
-					public void method() {
-						algo1.speedUp();
-					}
-				});
-			}
+		updownBtn.addActionListener(e -> {
+			return_home = !return_home;
+			algo1.speedDown();
+			algo1.spinBy(180, true, () -> algo1.speedUp());
 		});
-		updownBtn.setBounds(1500, 500, 120, 50);
+		updownBtn.setBounds(1700, 400, 120, 50);
 		frame.getContentPane().add(updownBtn);
 		//
-		
+
 		JButton Graph = new JButton("Open Graph");
-		Graph.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.mGraph.drawGraph();
-			  }
-		});
+		Graph.addActionListener(e -> algo1.mGraph.drawGraph());
 		Graph.setBounds(1600, 400, 120, 50);
 		frame.getContentPane().add(Graph);
 		
@@ -271,10 +233,10 @@ public class SimulationWindow {
 	
 	public void updateInfo(int deltaTime) {
 		info_label.setText(algo1.drone.getInfoHTML());
-		info_label2.setText("<html>" + String.valueOf(algo1.counter) + " <BR>isRisky:" + String.valueOf(algo1.is_risky) + 
-				"<BR>" + String.valueOf(algo1.risky_dis) + "</html>");
-		info_label3.setText("<html>" +"Time Flying: "+ s.getElapsedTimeSecs()+"</html>");
-		
+		info_label2.setText("<html>" + algo1.counter + " <BR>isRisky:" + algo1.is_risky +
+				"<BR>" + algo1.risky_dis + "</html>");
+		info_label3.setText("<html>" + "Time Flying: " + s.getElapsedTimeSecs() + "</html>");
+
 	}
 	
 	public void stopCPUS() {
