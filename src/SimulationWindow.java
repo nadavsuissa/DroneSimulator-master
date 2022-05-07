@@ -53,8 +53,10 @@ public class SimulationWindow {
 			  public void actionPerformed(ActionEvent e)
 			  {
 				  if(toogleStop) {
+					  s.stop();
 					  CPU.stopAllCPUS();
 				  } else {
+					  s.start();
 					  CPU.resumeAllCPUS();
 				  }
 				  toogleStop = !toogleStop;
@@ -149,35 +151,17 @@ public class SimulationWindow {
 		frame.getContentPane().add(spinBtn5);
 		
 		JButton spinBtn6 = new JButton("spin-30");
-		spinBtn6.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.spinBy(-30);
-			  }
-		});
+		spinBtn6.addActionListener(e -> algo1.spinBy(-30));
 		spinBtn6.setBounds(1500, 300, 100, 50);
 		frame.getContentPane().add(spinBtn6);
 		
 		JButton spinBtn7 = new JButton("spin-45");
-		spinBtn7.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.spinBy(-45);
-			  }
-		});
+		spinBtn7.addActionListener(e -> algo1.spinBy(-45));
 		spinBtn7.setBounds(1600, 300, 100, 50);
 		frame.getContentPane().add(spinBtn7);
 		
 		JButton spinBtn8 = new JButton("spin-60");
-		spinBtn8.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  algo1.spinBy(-60);
-			  }
-		});
+		spinBtn8.addActionListener(e -> algo1.spinBy(-60));
 		spinBtn8.setBounds(1700, 300, 100, 50);
 		frame.getContentPane().add(spinBtn8);
 		
@@ -186,13 +170,7 @@ public class SimulationWindow {
 		 */
 		
 		JButton toogleMapBtn = new JButton("toogle Map");
-		toogleMapBtn.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  toogleRealMap = !toogleRealMap;
-			  }
-		});
+		toogleMapBtn.addActionListener(e -> toogleRealMap = !toogleRealMap);
 		toogleMapBtn.setBounds(1300, 400, 120, 50);
 		frame.getContentPane().add(toogleMapBtn);
 		
@@ -201,12 +179,9 @@ public class SimulationWindow {
 		 */
 		
 		JButton toogleAIBtn = new JButton("toogle AI");
-		toogleAIBtn.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  toogleAI = !toogleAI;
-			  }
+		toogleAIBtn.addActionListener(e -> {
+			s.start();
+			toogleAI = !toogleAI;
 		});
 		toogleAIBtn.setBounds(1400, 400, 120, 50);
 		frame.getContentPane().add(toogleAIBtn);
@@ -217,19 +192,15 @@ public class SimulationWindow {
 		
 
 		JButton returnBtn = new JButton("Return Home");
-		returnBtn.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  return_home = !return_home;
-				  algo1.speedDown();
-				  algo1.spinBy(180, true, new Func() {
-						@Override
-						public void method() {
-							algo1.speedUp();
-						}
-					});
-			  }
+		returnBtn.addActionListener(e -> {
+			return_home = !return_home;
+			algo1.speedDown();
+			algo1.spinBy(180, true, new Func() {
+				  @Override
+				  public void method() {
+					  algo1.speedUp();
+				  }
+			  });
 		});
 		returnBtn.setBounds(1500, 400, 120, 50);
 		frame.getContentPane().add(returnBtn);
@@ -281,10 +252,15 @@ public class SimulationWindow {
 		info_label2 = new JLabel();
 		info_label2.setBounds(1400, 450, 300, 200);
 		frame.getContentPane().add(info_label2);
+
+		info_label3 = new JLabel();
+		info_label3.setBounds(1300, 550, 300, 200);
+		frame.getContentPane().add(info_label3);
 		
 		main();
 	}
 	public JLabel info_label2;
+	public JLabel info_label3;
 	public static boolean toogleRealMap = true;
 	public static boolean toogleAI = false;
 	
@@ -327,6 +303,7 @@ public class SimulationWindow {
 		info_label.setText(algo1.drone.getInfoHTML());
 		info_label2.setText("<html>" + String.valueOf(algo1.counter) + " <BR>isRisky:" + String.valueOf(algo1.is_risky) + 
 				"<BR>" + String.valueOf(algo1.risky_dis) + "</html>");
+		info_label3.setText("<html>" +"Time Flying: "+ s.getElapsedTimeSecs()+"</html>");
 		
 	}
 	
