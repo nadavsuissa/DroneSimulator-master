@@ -44,6 +44,17 @@ If you wish to add custom map it has to be black/white pixels- black is wall/obs
 - Sometimes drone might crash(hit the black pixels) specially in difficult obstacles.
 - Sometimes may be indifferent parameters which causing some pixels override - solution is to re-run project.
 
+
+## What we added:
+- As part of the assingment that Boaz gave us to improve this platform, we did the following:
+- Added A function to count the seconds that the Drone has been flying/in the air.
+- Added a function to initiate the drone and then land him
+- Added more Lidar sensors in order to improve drone scanning accuracy
+- Cleaned Gui
+- Clened Code
+- Fixed Drone Sensor range so that won't miss
+- Nadav Suissa, David Feust, Rawan Shareef.
+
 ## Images
 ![](https://i.imgur.com/lweL2Fp.png)
 ![](https://i.imgur.com/unUpwsL.png)
