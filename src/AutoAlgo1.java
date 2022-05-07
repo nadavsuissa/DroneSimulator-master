@@ -31,8 +31,9 @@ public class AutoAlgo1 {
 		drone.addLidar(0);
 		drone.addLidar(90);
 		drone.addLidar(-90);
+		drone.addLidar(-180);
 
-		
+
 		initMap();
 		
 		isRotating = 0;
@@ -126,10 +127,10 @@ public class AutoAlgo1 {
 		}
 	}
 	/*
-	
+
 	public void fineEdges(int x,int y) {
 		int radius = 6;
-		
+
 		for(int i=y-radius;i<y+radius;i++) {
 			for(int j=x-radius;j<x+radius;j++) {
 				if(Math.abs(y-i) <= 1 && Math.abs(x-j) <= 1) {
@@ -152,7 +153,7 @@ public class AutoAlgo1 {
 			x1 = tempX;
 			y1 = tempY;
 		}
-		
+
 	     double deltax = x1 - x0;
 	     double deltay = y1 - y0;
 	     double deltaerr = Math.abs(deltay / deltax);    // Assume deltax != 0 (line is not vertical),
@@ -166,7 +167,7 @@ public class AutoAlgo1 {
                 error=error - deltax;
 	        }
 	     }
-	
+
 	}
 	*/
 	

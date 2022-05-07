@@ -2,7 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntConsumer;
 
+
 public class CPU{
+
+	public static long start =0;
+	public static long end =0;
 	public int hz ; 
 	public List<IntConsumer> functions_list;
 	private boolean isPlay;
@@ -39,12 +43,16 @@ public class CPU{
 		for(int i=0;i<all_cpus.size();i++) {
 			all_cpus.get(i).isPlay = false;
 		}
+		end = System.currentTimeMillis();
 	}
 	
 	public static void resumeAllCPUS() {
 		for(int i=0; i<all_cpus.size(); i++) {
 			all_cpus.get(i).resume();
 		}
+		 start = System.currentTimeMillis();
+// ...
+
 	}
 	
 	synchronized void resume() {
