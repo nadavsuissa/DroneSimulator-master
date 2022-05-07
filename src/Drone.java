@@ -1,7 +1,6 @@
 import javax.imageio.ImageIO;
 
 import java.awt.Graphics;
-import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.DecimalFormat;
@@ -49,7 +48,7 @@ public class Drone {
 	public void addLidar(int degrees) {
 		Lidar lidar = new Lidar(this,degrees);
 		lidars.add(lidar);
-		cpu.addFunction(lidar::getSimulationDistance);
+        cpu.addFunction(value -> lidar.getSimulationDistance());
 	}
 	
 	public Point getPointOnMap() {
@@ -142,13 +141,9 @@ public class Drone {
 				
 			}
 		}
-		//Point p = getPointOnMap();
-		//g.drawImage(mImage,p.getX(),p.getY(),mImage.getWidth(),mImage.getHeight());
-		
-		
-		
-		
-		for(int i=0;i<lidars.size();i++) {
+
+
+        for(int i=0;i<lidars.size();i++) {
 			Lidar lidar = lidars.get(i);
 			lidar.paint(g);
 		}

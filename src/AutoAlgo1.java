@@ -3,16 +3,18 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class AutoAlgo1 {
-	
+
 	int map_size = 3000;
-	enum PixelState {blocked,explored,unexplored,visited};
-	PixelState map[][];
+
+	enum PixelState {blocked, explored, unexplored, visited}
+
+	PixelState[][] map;
 	Drone drone;
 	Point droneStartingPoint;
-	
+
 	ArrayList<Point> points;
-	
-	
+
+
 	int isRotating;
 	ArrayList<Double> degrees_left;
 	ArrayList<Func> degrees_left_func;
@@ -24,8 +26,8 @@ public class AutoAlgo1 {
 	CPU ai_cpu;
 	public AutoAlgo1(Map realMap) {
 		degrees_left = new ArrayList<>();
-		degrees_left_func =  new ArrayList<>();
-		points = new ArrayList<Point>();
+		degrees_left_func = new ArrayList<>();
+		points = new ArrayList<>();
 		
 		drone = new Drone(realMap);
 		drone.addLidar(0);
@@ -48,8 +50,8 @@ public class AutoAlgo1 {
 				map[i][j] = PixelState.unexplored;
 			}
 		}
-		
-		droneStartingPoint = new Point(map_size/2,map_size/2);
+
+		droneStartingPoint = new Point(map_size / 2.0, map_size / 2.0);
 	}
 	
 	public void play() {
@@ -198,11 +200,10 @@ public class AutoAlgo1 {
 	}
 	
 	public void paintPoints(Graphics g) {
-		for(int i=0;i<points.size();i++) {
-			Point p = points.get(i);
-			g.drawOval((int)p.x + (int)drone.startPoint.x - 10, (int)p.y + (int)drone.startPoint.y-10, 20, 20);
+		for (Point p : points) {
+			g.drawOval((int) p.x + (int) drone.startPoint.x - 10, (int) p.y + (int) drone.startPoint.y - 10, 20, 20);
 		}
-		
+
 	}
 	
 	public void paint(Graphics g) {

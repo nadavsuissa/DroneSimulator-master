@@ -11,14 +11,14 @@ public class Lidar{
 		this.degrees = degrees;
 	}
 	
-	public double getDistance(int deltaTime) {
-		Point actualPointToShoot= drone.getPointOnMap();
-		double rotation = drone.getRotation()+degrees;
-		
-		double distanceInCM=1;
-		while(distanceInCM <= WorldParams.lidarLimit) { 
+	public double getDistance() {
+		Point actualPointToShoot = drone.getPointOnMap();
+		double rotation = drone.getRotation() + degrees;
+
+		double distanceInCM = 1;
+		while (distanceInCM <= WorldParams.lidarLimit) {
 			Point p = Tools.getPointByDistance(actualPointToShoot, rotation, distanceInCM);
-			if(drone.realMap.isCollide((int)p.x,(int)p.y)) {
+			if (drone.realMap.isCollide((int) p.x, (int) p.y)) {
 				break;
 			}
 			distanceInCM++;
@@ -27,21 +27,20 @@ public class Lidar{
 		
 		return distanceInCM;
 	}
-	
-	public double getSimulationDistance(int deltaTime) {
-		Random ran= new Random();
+
+	public void getSimulationDistance() {
+		Random ran = new Random();
 		double distanceInCM;
-		if(ran.nextFloat() <= 0.05f) { // 5% of the time, not getting an answer
+		if (ran.nextFloat() <= 0.05f) { // 5% of the time, not getting an answer
 			distanceInCM = 0;
 		} else {
-			distanceInCM = getDistance(deltaTime);
-			distanceInCM += (int)ran.nextInt(WorldParams.lidarNoise*2) - WorldParams.lidarNoise; // +- 5 CM to the final calc
+			distanceInCM = getDistance();
+			distanceInCM += ran.nextInt(WorldParams.lidarNoise * 2) - WorldParams.lidarNoise; // +- 5 CM to the final calc
 		}
 		
 		
 		
 		this.current_distance = distanceInCM; // store it for instance get
-		return distanceInCM;
 	}
 
 	
